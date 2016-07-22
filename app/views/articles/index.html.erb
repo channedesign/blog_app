@@ -1,3 +1,10 @@
-<h1>Creating a new Article</h1>
+<h1>Listing all Articles</h1>
 
-<%= link_to 'New Article', new_article_path %>
+<%= link_to 'New Article', new_article_path, class: 'btn btn-default' %>
+
+<% @articles.each do |article| %>
+	<div class='well well-lg'>
+		<h1><%= link_to article.title, article_path(article) %></h1>
+		<p><%= article.body %></p>
+	</div>
+<% end %>
