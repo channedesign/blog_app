@@ -6,5 +6,10 @@
 	<div class='well well-lg'>
 		<h1><%= link_to article.title, article_path(article) %></h1>
 		<p><%= article.body %></p>
+		<div>
+			<% if article.user %>
+				<small>Created by: <%= article.user.email %></small>
+			<% end %>
+		</div>
 	</div>
 <% end %>
