@@ -18,6 +18,4 @@ RSpec.describe 'Deleting Articles', type: :feature do
 		expect(page.current_path).to eq(root_path)
 	end
 
-	
-
 end
