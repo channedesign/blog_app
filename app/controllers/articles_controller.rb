@@ -26,15 +26,22 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    if @article.user != current_user
+      deny_access
+    end
   end
 
   def update
-    if @article.update(article_params)
-      flash[:success] = 'Article has been updated'
-      redirect_to @article
+    if @article.user != current_user
+      deny_access
     else
-      flash.now[:danger] = "Article has not been updated"
-      render :edit
+      if @article.update(article_params)
+        flash[:success] = 'Article has been updated'
+        redirect_to @article
+      else
+        flash.now[:danger] = "Article has not been updated"
+        render :edit
+      end
     end
   end
 
@@ -53,5 +60,8 @@ class ArticlesController < ApplicationController
     def find_id
       @article = Article.find(params[:id])
     end
-
+    def deny_access
+      flash[:danger] = 'You can only edit your own article'
+      redirect_to root_path
+    end
 end

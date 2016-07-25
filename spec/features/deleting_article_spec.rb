@@ -4,7 +4,7 @@ RSpec.describe 'Deleting Articles', type: :feature do
 	
 	before do
 		@user = User.create!(email: 'bob@bob.com', password: 'Password1234')
-		@article = Article.create(title: 'Some title', body: 'some body')
+		@article = @user.articles.create(title: 'Some title', body: 'some body')
 		login_as(@user)
 	end
 

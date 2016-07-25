@@ -4,7 +4,7 @@ RSpec.describe 'Editing Articles', type: :feature do
 	
 	before do
 		@user = User.create!(email: 'bob@bob.com', password: 'Password1234')
-		@article = Article.create(title: 'first article', body: 'body of first article')
+		@article = @user.articles.create(title: 'first article', body: 'body of first article')
 		login_as(@user)
 	end
 
