@@ -5,12 +5,17 @@ class CommentsController < ApplicationController
 		@comment = @article.comments.new(comment_params)
 		@comment.user = current_user
 
-		if @comment.save
-			flash[:success] = "Comment has been created"
+		if @comment.user != nil
+			if @comment.save
+				flash[:success] = "Comment has been created"
+			else
+				flash[:danger] = "Comment has not been created"
+			end
+			redirect_to article_path(@article)
 		else
-			flash[:danger] = "Comment has not been created"
+			flash[:danger] = 'You need to be signed in'
+			redirect_to new_user_session_path
 		end
-		redirect_to article_path(@article)
 	end
 
 	private
