@@ -7,6 +7,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @comments = @article.comments.new
   end
 
   def new

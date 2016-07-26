@@ -12,3 +12,20 @@
 		<%= link_to 'Delete Article', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 	<% end %>
 </article>
+
+
+<div class="col-sm-12">
+	<%= simple_form_for([@article, @comments], html: { class: "form-horizontal" }) do |f| %>
+		<%= f.input :body, input_html: { rows: 5 } %>
+		<%= f.button :submit %>
+	<% end %>
+</div>
+
+<% if @article.comments.any? %>
+	<% @article.comments.persisted.each do |comment| %>
+		<p><%= comment.body %></p>
+		<p><%= time_ago_in_words(comment.created_at) %> ago by <%= comment.user.email %></p>
+	<% end %>
+<% else %>
+	<p>There are not comments for this article</p>
+<% end %>
